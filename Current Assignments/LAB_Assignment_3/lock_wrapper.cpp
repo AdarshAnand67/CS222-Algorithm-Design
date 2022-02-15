@@ -1,3 +1,15 @@
+/*
+    Lab 3
+
+    CS222 - Algorithm Design Course
+
+    This code is written as an assignment under prof Dr. Rahul.
+
+    Author: Adarsh Anand
+
+    Roll No: 2003101
+*/
+
 /*Adarsh Anand*/
 #include <bits/stdc++.h>
 using namespace std;
@@ -16,24 +28,18 @@ bool is_prime(int x)
     return true;
 }
 
-void configure(int k, int locker_ID, int L)
+void CONFIGURE(int k, int locker_ID, int L)
 {
     /*
-The CONFIGURE module should take the number of users k, a locker id, and a key L as
-input and should generate k secondary keys (u1, u2, . . . , uk) and k distinct prime numbers
-p1, p2, . . . , pk. Each secondary key should be a 4 digit number meant for each of those k
-users, and the primary key L is meant for the locker. You may assume L < p1 ×p2 ×. . .×pk
-Further, the configuration module writes an entry to the file conf ig.txt where the entry is
-of the form:
+        The CONFIGURE module should take the number of users k, a locker id, and a key L as
+        input and should generate k secondary keys (u1, u2, . . . , uk) and k distinct prime numbers
+        p1, p2, . . . , pk. Each secondary key should be a 4 digit number meant for each of those k
+        users, and the primary key L is meant for the locker. You may assume L < p1 ×p2 ×. . .×pk
+        Further, the configuration module writes an entry to the file conf ig.txt where the entry is
+        of the form:
 
-locker id − k, p1, p2, . . . , pk
-Further, given the sequence p1, p2, . . . , pk, one can construct
-
-a unique L (0 ≤ L < Y
-k
-i=1
-pi) from the sequence (u1, u2, . . . , uk) provided ui < pi for 1 ≤ i ≤ k.
-*/
+        locker id − k, p1, p2, . . . , pk
+    */
     int p[k]; // array of prime numbers - p1, p2, . . . , pk
     int u[k]; // array of secondary keys - u1, u2, . . . , uk
     int i;
@@ -86,20 +92,20 @@ int multi_inverse(int a, int b)
     return y;
 }
 
-void use(int locker_ID, int L, int u[])
+void USE(int locker_ID, int L, int u[])
 {
     /*
-The USE module is supposed to read the locker id and fetch the value of k and the pis
-from the configuration file conf ig.txt to begin with. Further, it queries the user(s) to feed in
-u1, u2, . . . , uk (order matters) as input. The task in hand is to generate L using p1, p2, . . . , pk
-so as to let the users access the shared locker.
-Your implementation should be based on Chinese Remainder Theorem. You may assume the
-number of users to be 2 to begin with and pick a pair of sufficiently large prime numbers such
-that the product of these two prime numbers is at least 1000. Then you may try to increase it
-to 3, and then 4.
-If your code works for at most 5 users, that’s fine.
-**Bonus credit for code that works for arbitrary k.
-*/
+        The USE module is supposed to read the locker id and fetch the value of k and the pis
+        from the configuration file conf ig.txt to begin with. Further, it queries the user(s) to feed in
+        u1, u2, . . . , uk (order matters) as input. The task in hand is to generate L using p1, p2, . . . , pk
+        so as to let the users access the shared locker.
+        Your implementation should be based on Chinese Remainder Theorem. You may assume the
+        number of users to be 2 to begin with and pick a pair of sufficiently large prime numbers such
+        that the product of these two prime numbers is at least 1000. Then you may try to increase it
+        to 3, and then 4.
+        If your code works for at most 5 users, that’s fine.
+    */
+
     ifstream file;           // reading the file
     file.open("config.txt"); // opening the file
     int locker_id, k;
@@ -188,7 +194,10 @@ If your code works for at most 5 users, that’s fine.
 int main()
 {
     cout << "-----------------Hello!-------------------" << endl;
+    cout << "-----------------Welcome!-----------------" << endl;
+
     int k, locker_ID, L;
+
     cout << "Enter the number of users: ";
     cin >> k;
     cout << "Enter the locker ID: ";
@@ -198,7 +207,7 @@ int main()
 
     // k=3,locker_ID=11,L=12;
 
-    configure(k, locker_ID, L); // configuring the locker
+    CONFIGURE(k, locker_ID, L); // configuring the locker
 
     // int u[k] = {7,29,31};
 
@@ -209,6 +218,6 @@ int main()
         cin >> u[i]; // reading the secondary keys
     }
 
-    use(locker_ID, L, u); // using the locker to get L
+    USE(locker_ID, L, u); // using the locker to get L
     return 0;
 }

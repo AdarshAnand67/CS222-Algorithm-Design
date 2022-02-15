@@ -1,5 +1,5 @@
 /*
-    Assignment 2
+    Lab 2
 
     CS222 - Algorithm Design Course
 
