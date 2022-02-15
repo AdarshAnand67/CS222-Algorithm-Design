@@ -87,9 +87,11 @@ If your code works for at most 5 users, that’s fine.
 */
     ifstream file; // reading the file
     file.open("config.txt"); // opening the file
+
     int locker_id,k;
     string line;
     getline(file,line);
+
     // extracting the locker id and number of users
     // split on -
     stringstream ss(line);
@@ -105,38 +107,30 @@ If your code works for at most 5 users, that’s fine.
         }
         i++;
     }
-    cout<<"------------------------------------"<<endl;
-    cout<<"Locker ID: "<<locker_id<<endl;
-    cout<<"Number of users: "<<k<<endl;
+    cout<<"Locker ID: "<<locker_id<<" Number of users: "<<k<<endl;
     file.close();
     
-    int p[k]; // array of prime numbers - p1, p2, . . . , pk
-    ifstream file2; // reading the file 
-    file2.open("config.txt"); // opening the file
-    getline(file2,line); // extracting the prime numbers
-    stringstream ss2(line); // splitting on ,
+    // TODO - Get all the prime numbers from the file
+    int p[k];
+    ifstream file2;
+    file2.open("config.txt");
+    getline(file2,line);
+    cout<<line<<endl;
+    stringstream ss2(line);
     i=0;
-    while(getline(ss2,token,',')){ 
+    while(getline(ss2,token,',')){
         if(i==0){
             // skip the locker id
         }
         else{
-            p[i-1]=stoi(token);     // storing the prime numbers in the array
+            p[i-1]=stoi(token);
         }
         i++;
     }
-    cout<<"Prime numbers [pi]: ";
-    for(i=0;i<k;i++){
-        cout<<p[i]<<" ";
-    }
-    cout<<endl;
-    cout<<"Secondary keys [ui]: ";
-    for (int i = 0; i < k; i++)
-    {
-        cout<<u[i]<<" ";
-    }
-    cout<<endl;
-    
+    // cout<<"Prime numbers: ";
+    // for(i=0;i<k;i++){
+    //     cout<<p[i]<<" ";
+    // }
     file2.close();
 
 
@@ -148,44 +142,47 @@ If your code works for at most 5 users, that’s fine.
         ...
         L = pk mod(uk) , uk<pk
     */
-    int M=1; // M is the product of all the prime numbers
-    for(i=0;i<k;i++){
-        M*=u[i]; // M = u1*u2*...*uk
-    }
-    for (int i = 0; i < k; i++)
-    {
-        int Mi = M/p[i]; // Mi = M/p1, M/p2, ..., M/pk
-        int Mi_inv = multi_inverse(Mi,p[i]); // Mi_inv = M/p1, M/p2, ..., M/pk
-        L += (p[i]*Mi*Mi_inv)%M; // L = L + (p1*M/p1*(M/p1)^-1) + (p2*M/p2*(M/p2)^-1) + ... + (pk*M/pk*(M/pk)^-1)
-    }
-    L = L%M; // L = L mod M
-    cout<<"L : "<<L<<endl;
-    cout<<"---------------- Thanks! --------------------"<<endl;
+    // cout<<k<<endl;
+    // int M=1; // M is the product of all the prime numbers
+    // for(i=0;i<k;i++){
+    //     M*=u[i]; // M = u1*u2*...*uk
+    // }
+    // for (int i = 0; i < k; i++)
+    // {
+    //     int Mi = M/p[i]; // Mi = M/p1, M/p2, ..., M/pk
+    //     int Mi_inv = multi_inverse(Mi,p[i]); // Mi_inv = M/p1, M/p2, ..., M/pk
+    //     L += (p[i]*Mi*Mi_inv)%M; // L = L + (p1*M/p1*(M/p1)^-1) + (p2*M/p2*(M/p2)^-1) + ... + (pk*M/pk*(M/pk)^-1)
+    // }
+    // L = L%M; // L = L mod M
+    // cout<<"L = "<<L<<endl;
+    // cout<<1;
 }
 
 int main()
 {
-    cout<<"-----------------Hello!-------------------"<<endl;
     int k,locker_ID,L;
-    cout<<"Enter the number of users: ";
-    cin>>k;
-    cout<<"Enter the locker ID: ";
-    cin>>locker_ID;
-    cout<<"Enter the key: ";
-    cin>>L;
+    // cout<<"Enter the number of users: ";
+    // cin>>k;
+    // cout<<"Enter the locker ID: ";
+    // cin>>locker_ID;
+    // cout<<"Enter the key: ";
+    // cin>>L;
 
-    // k=3,locker_ID=11,L=12;
+    k=3,locker_ID=11,L=12;
 
     configure(k,locker_ID,L); // configuring the locker
 
-    // int u[k] = {7,29,31};
+    int u[k] = {7,29,31};
 
-    int u[k]; // array of secondary keys - u1, u2, . . . , uk
-    for(int i=0;i<k;i++){
-        cout<<"Enter the secondary key for user "<<i+1<<" : ";
-        cin>>u[i]; // reading the secondary keys
-    }
+    // int u[k]; // array of secondary keys - u1, u2, . . . , uk
+    // for(int i=0;i<k;i++){
+    //     cout<<"Enter the secondary key for user "<<i+1<<" : ";
+    //     cin>>u[i]; // reading the secondary keys
+    // }
 
     use(locker_ID,L,u); // using the locker to get L
+
+
+    cout<<"\n";
     return 0;
 }
