@@ -68,12 +68,12 @@ void CONFIGURE(int k, int locker_ID, int L)
     }
     else
     { // if locker_ID is not already present in the file
+        s.insert(locker_ID); // adding locker_ID to the set
 
-        ofstream file;           // creating a file
-        file.open("config.txt"); // opening the file
-
+        // Append to file if locker_ID is not already present in the file
+        ofstream file;
+        file.open("config.txt", ios::app);
         s.insert(locker_ID);
-
         file << 'L' << locker_ID << ' ' << k << " "; // writing the locker id and number of users in the file
         for (i = 0; i < k; i++)
         {
@@ -318,4 +318,11 @@ int main()
             flag = false;
         }
     }
+    // Clear the set s
+    s.clear();
+
+    // Clear the map sec_keys
+    sec_keys.clear();
+
+    return 0;
 }
