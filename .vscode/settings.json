@@ -2,6 +2,7 @@
   "C_Cpp.errorSquiggles": "Enabled",
   "restructuredtext.confPath": "",
   "files.associations": {
-    "iosfwd": "cpp"
+    "iosfwd": "cpp",
+    "iostream": "cpp"
   }
 }
