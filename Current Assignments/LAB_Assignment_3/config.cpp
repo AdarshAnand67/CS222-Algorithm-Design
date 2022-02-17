@@ -67,7 +67,7 @@ void CONFIGURE(int k, int locker_ID, int L)
         return;
     }
     else
-    { // if locker_ID is not already present in the file
+    {                        // if locker_ID is not already present in the file
         s.insert(locker_ID); // adding locker_ID to the set
 
         // Append to file if locker_ID is not already present in the file
@@ -90,7 +90,7 @@ void CONFIGURE(int k, int locker_ID, int L)
     }
     /*
         Display u1 u2 . . . uk to the screen
-        u to be of exactly 4 digits 
+        u to be of exactly 4 digits
     */
     for (i = 0; i < k; i++)
     {
@@ -324,5 +324,15 @@ int main()
     // Clear the map sec_keys
     sec_keys.clear();
 
+    // Do you want to clear the file config.txt?
+    cout << "Do you want to clear the file config.txt? (0/1) : ";
+    int x;
+    cin >> x;
+    if (x == 1)
+    {
+        ofstream fout;
+        fout.open("config.txt");
+        fout.close();
+    }
     return 0;
 }

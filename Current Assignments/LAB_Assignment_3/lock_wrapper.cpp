@@ -59,8 +59,8 @@ void CONFIGURE(int k, int locker_ID, int L)
     }
 
     /*
-        Write locker_id to the file if locker_id is not already present in the file.
-    */
+    Write locker_id to the file if locker_id is not already present in the file.
+*/
     if (s.count(locker_ID))
     { // if locker_ID is already present in the file
         cout << "Locker ID already exists so not adding in config.txt" << endl;
@@ -146,13 +146,11 @@ int USE(int locker_ID, int L, vector<int> u)
     */
 
     // Read Locker_ID,k,p1,p2,...,pk from the file config.txt
-
     ifstream file;           // creating a file
     file.open("config.txt"); // opening the file
     int k;
     string locker_id;
     file >> locker_id >> k;
-
     // cout<<locker_id<<" "<<k<<endl;
     int p[k];
     for (int i = 0; i < k; i++)
@@ -160,7 +158,6 @@ int USE(int locker_ID, int L, vector<int> u)
         file >> p[i];
         // cout<<p[i]<<" ";
     }
-
     file.close(); // closing the file
 
     /*
@@ -171,28 +168,20 @@ int USE(int locker_ID, int L, vector<int> u)
         ...
         L = pk mod(uk) , uk<pk
     */
-
     int M = 1; // M is the product of all the prime numbers
     for (int i = 0; i < k; i++)
     {
         M *= u[i]; // M = u1*u2*...*uk
     }
-
     // cout<<"M = "<<M<<endl;
-
     for (int i = 0; i < k; i++)
     {
         int Mi = M / p[i];                    // Mi = M/p1, M/p2, ..., M/pk
-
         int Mi_inv = multi_inverse(Mi, p[i]); // Mi_inv = M/p1, M/p2, ..., M/pk
-
         L += (p[i] * Mi * Mi_inv) % M;        // L = L + (p1*M/p1*(M/p1)^-1) + (p2*M/p2*(M/p2)^-1) + ... + (pk*M/pk*(M/pk)^-1)
     }
-
     L = L % M; // L = L mod M
-
     // cout << "L : " << L << endl;
-    
     return L;
 }
 
@@ -335,5 +324,15 @@ int main()
     // Clear the map sec_keys
     sec_keys.clear();
 
+    // Do you want to clear the file config.txt?
+    cout << "Do you want to clear the file config.txt? (0/1) : ";
+    int x;
+    cin >> x;
+    if (x == 1)
+    {
+        ofstream fout;
+        fout.open("config.txt");
+        fout.close();
+    }
     return 0;
 }
