@@ -214,7 +214,15 @@ int main()
         if (n == 1) // CONFIGURE
         {
             int m;
-            cout << "Enter your choice for m (1/2/3) : ";
+            cout << "Enter your choice for m (1/2/3) : " << endl;
+
+            // 1. Add New Locker Entry
+            // 2. Delete a locker entry
+            // 3. Exit
+
+            cout << "1. Add New Locker Entry" << endl;
+            cout << "2. Delete a locker entry" << endl;
+            cout << "3. Exit" << endl;
 
             cin >> m;
             if (m == 1) // ADD A NEW ENTRY
