@@ -1,0 +1,2 @@
+Enter size of array a: Enter size of array b: Enter elements of array a: Enter elements of array b: 2 3 
+2 3 5 

@@ -10,7 +10,6 @@
     Roll No: 2003101
 */
 
-/*Adarsh Anand*/
 #include <bits/stdc++.h>
 using namespace std;
 #define endl '\n'
@@ -48,9 +47,9 @@ void CONFIGURE(int k, int locker_ID, int L)
     int p[k]; // array of prime numbers - p1, p2, . . . , pk
     int u[k]; // array of secondary keys - u1, u2, . . . , uk
     int i;
-    for (i = 0; i < k; i++)
+    for (int i = 0; i < k; i++)
     {
-        p[i] = rand() % 10000 + 1; // generating primes p1, p2, . . . , pk 4 digit only
+        p[i] = rand() % 10000 + 1; // generating primes p1, p2, . . . , pk (4 digit only)
         while (!is_prime(p[i]) || p[i] > 9999 || p[i] < 1000)
         {
             // Making sure all numbers are 4 digit only and prime
@@ -59,15 +58,17 @@ void CONFIGURE(int k, int locker_ID, int L)
     }
 
     /*
-    Write locker_id to the file if locker_id is not already present in the file.
-*/
+        Write locker_id to the file if locker_id is not already present in the file.
+    */
+
     if (s.count(locker_ID))
     { // if locker_ID is already present in the file
         cout << "Locker ID already exists so not adding in config.txt" << endl;
         return;
     }
     else
-    {                        // if locker_ID is not already present in the file
+    { // if locker_ID is not already present in the file
+
         s.insert(locker_ID); // adding locker_ID to the set
 
         // Append to file if locker_ID is not already present in the file
@@ -99,7 +100,7 @@ void CONFIGURE(int k, int locker_ID, int L)
         { // if not 4 digits re-generate
             u[i] = rand() % 10000 + 1;
         }
-        cout << u[i] << " ";
+        cout << "u" << i << " " << u[i] << " ";
         sec_keys.push_back(u[i]);
     }
     cout << endl;
@@ -110,6 +111,8 @@ int multi_inverse(int a, int b)
     /*
         Input : a, b - integers
         Output : x - integer such that a*x = 1 (mod b)
+
+        Calculates the multiplicative inverse of a mod b
     */
     int x, y, d; // x, y, d are temporary variables
     x = 0;
@@ -138,25 +141,26 @@ int USE(int locker_ID, int L, vector<int> u)
         from the configuration file conf ig.txt to begin with. Further, it queries the user(s) to feed in
         u1, u2, . . . , uk (order matters) as input. The task in hand is to generate L using p1, p2, . . . , pk
         so as to let the users access the shared locker.
+
         Your implementation should be based on Chinese Remainder Theorem. You may assume the
         number of users to be 2 to begin with and pick a pair of sufficiently large prime numbers such
         that the product of these two prime numbers is at least 1000. Then you may try to increase it
         to 3, and then 4.
-        If your code works for at most 5 users, that’s fine.
     */
 
     // Read Locker_ID,k,p1,p2,...,pk from the file config.txt
+
     ifstream file;           // creating a file
     file.open("config.txt"); // opening the file
+
     int k;
     string locker_id;
+
     file >> locker_id >> k;
-    // cout<<locker_id<<" "<<k<<endl;
     int p[k];
     for (int i = 0; i < k; i++)
     {
         file >> p[i];
-        // cout<<p[i]<<" ";
     }
     file.close(); // closing the file
 
@@ -168,21 +172,22 @@ int USE(int locker_ID, int L, vector<int> u)
         ...
         L = pk mod(uk) , uk<pk
     */
+
     int M = 1; // M is the product of all the prime numbers
     for (int i = 0; i < k; i++)
     {
         M *= u[i]; // M = u1*u2*...*uk
     }
-    // cout<<"M = "<<M<<endl;
+
     for (int i = 0; i < k; i++)
     {
         int Mi = M / p[i];                    // Mi = M/p1, M/p2, ..., M/pk
-        int Mi_inv = multi_inverse(Mi, p[i]); // Mi_inv = M/p1, M/p2, ..., M/pk
+        int Mi_inv = multi_inverse(Mi, p[i]); // Mi_inv = (M/p1)^-1 mod p1, (M/p2)^-1 mod p2, ..., (M/pk)^-1 mod pk
         L += (p[i] * Mi * Mi_inv) % M;        // L = L + (p1*M/p1*(M/p1)^-1) + (p2*M/p2*(M/p2)^-1) + ... + (pk*M/pk*(M/pk)^-1)
     }
-    L = L % M; // L = L mod M
-    // cout << "L : " << L << endl;
-    return L;
+
+    L = L % M;     // L = L mod M
+    return abs(L); // return L to the main function
 }
 
 int main()
@@ -197,12 +202,13 @@ int main()
     cout << "-----------------Hello!-------------------" << endl;
     cout << "-----------------Welcome!-----------------" << endl;
 
-    bool flag = true;
-    int k, locker_ID, L;
+    bool flag = true;    // flag to check if the user wants to continue
+    int k, locker_ID, L; // k is the number of users, locker_ID is the locker ID, L is the shared locker
 
     while (flag)
     { // while loop to keep the program running
-        cout << "Enter your choice for n (1/2/3) : " << endl;
+
+        cout << "-----------------Enter your choice for n (1/2/3) : -----------------" << endl;
 
         cout << "1. CONFIGURE" << endl;
         cout << "2. USE" << endl;
@@ -214,17 +220,14 @@ int main()
         if (n == 1) // CONFIGURE
         {
             int m;
-            cout << "Enter your choice for m (1/2/3) : " << endl;
-
-            // 1. Add New Locker Entry
-            // 2. Delete a locker entry
-            // 3. Exit
+            cout << "-----------------Enter your choice for m (1/2/3) : -----------------" << endl;
 
             cout << "1. Add New Locker Entry" << endl;
             cout << "2. Delete a locker entry" << endl;
             cout << "3. Exit" << endl;
 
             cin >> m;
+
             if (m == 1) // ADD A NEW ENTRY
             {
                 // Taking inputs
@@ -245,20 +248,23 @@ int main()
                     (Display) Entry Successfully Deleted/Invalid Entry
                     If lockerID found delete the entry from the file
                 */
+
                 cout << "Enter the locker ID to delete (5 chars without L): ";
                 cin >> locker_ID;
 
                 string to_remove = "L" + to_string(locker_ID);
 
-                // mark the locker_ID as invalid
-                // only those locker_ID are valid which are present in the set s
+                // mark the locker_ID as invalid only those locker_ID are valid which are present in the set s
+
                 if (s.count(locker_ID))
-                { // if the locker_ID is present in the set s
+                {
+                    // if the locker_ID is present in the set s
                     s.erase(locker_ID);
                     cout << "Entry " << to_remove << " successfully deleted" << endl;
                 }
                 else
-                { // if the locker_ID is not present in the set s
+                {
+                    // if the locker_ID is not present in the set s
                     cout << "Invalid Entry" << endl;
                 }
             }
@@ -278,20 +284,27 @@ int main()
             // Enter LockerId:
             cout << "Enter the locker ID (5 chars without L): ";
             cin >> locker_ID;
+
             // If Id present in config.txt
+
             if (s.count(locker_ID))
             {
+                // if the locker_ID is present in the set s
+
                 bool flag = true; // all the secondary keys are valid
                 int u[k];         // array of secondary keys - u1, u2, . . . , uk
+
                 for (int i = 0; i < k; i++)
                 {
                     cout << "Enter the secondary key for user " << i + 1 << " : ";
                     cin >> u[i]; // reading the secondary keys
                 }
+
                 for (int i = 0; i < k; i++)
                 {
                     if (u[i] != sec_keys[i])
-                    { // if any of the secondary keys is invalid
+                    {
+                        // if any of the secondary keys is invalid
                         flag = false;
                         break;
                     }
@@ -299,30 +312,38 @@ int main()
 
                 // If manages to successfully reconstruct the key
                 // This should match what you fed in during the configuration phase
+
                 if (flag)
                 {
                     int ans = USE(locker_ID, L, sec_keys);
-                    cout << "The Locker Accesscode is : " << ans << endl;
+                    cout << "******The Locker Accesscode is : " << ans << "******" << endl;
                 }
+
                 else
-                { // If any of the secondary keys is invalid
-                    cout << "Invalid Accesscode" << endl;
+                {
+                    // If any of the secondary keys is invalid
+                    cout << "Invalid Accesscode returning to main menu" << endl;
                 }
             }
+
             else
-            { // If the locker_ID is not present in the set s
+            {
+                // If the locker_ID is not present in the set s
                 cout << "Invalid Entry" << endl;
             }
+
             USE(locker_ID, L, sec_keys); // using the locker to get L
         }
+
         else if (n == 3) // TERMINATE
         {
             cout << "---------------- Thanks! --------------------" << endl;
             flag = false;
         }
+
         else // INVALID
         {
-            cout << "Invalid choice" << endl;
+            cout << "Invalid choice closing the program" << endl;
             flag = false;
         }
     }
@@ -333,14 +354,22 @@ int main()
     sec_keys.clear();
 
     // Do you want to clear the file config.txt?
+    cout << "You append the locker ID to the file config.txt";
     cout << "Do you want to clear the file config.txt? (0/1) : ";
     int x;
     cin >> x;
     if (x == 1)
     {
+        // Clear the file config.txt
         ofstream fout;
-        fout.open("config.txt");
-        fout.close();
+        fout.open("config.txt"); // open the file
+        fout.close();            // close the file
+        cout << "File config.txt cleared" << endl;
+    }
+    else
+    {
+        // Do nothing
+        cout << "Did not clear the file config.txt" << endl;
     }
     return 0;
 }
