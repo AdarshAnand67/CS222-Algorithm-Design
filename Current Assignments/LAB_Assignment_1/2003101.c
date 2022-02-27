@@ -91,16 +91,14 @@ int insertNode(struct student **startPtr, struct student *root)
 
 		if (strcmp(root->rollNo, startcopy->rollNo) == 0) // if the roll number is already present
 		{
-			return 0; // return 0 not found
+			return 0; // return 0 not inserted
 		}
 		else if (strcmp(root->rollNo, startcopy->rollNo) < 0)
 		{
-			// if the roll number is less than the current node
 			startcopy = startcopy->left;
 		}
 		else
 		{
-			// if the roll number is greater than the current node
 			startcopy = startcopy->right;
 		}
 	}
@@ -116,9 +114,9 @@ int insertNode(struct student **startPtr, struct student *root)
 struct student *inordersuccessor(struct student *node)
 {
 	/*
-	inorder successor is the next successive element of the node
-	this function is called when the left and right node of bst is not null
-	then the value can be replace with the inorder successor
+		Inorder successor is the node which traversed next to given node in inorder traversal of binary tree. Inorder successor is the next successive element of the node
+		this function is called when the left and right node of BST is not null
+		then the value can be replace with the inorder successor
 	*/
 	struct student *cpy = node; // cpy is a copy of the node
 	while (cpy != NULL && cpy->left != NULL)
@@ -137,7 +135,6 @@ struct student *deletion(struct student *root, char rollNumber[20])
 		Return:
 			root : root node of the BST after deletion
 	*/
-
 	struct student *curr = root; // curr is a pointer to the current node
 	if (strcmp(rollNumber, curr->rollNo) < 0)
 	{
@@ -175,12 +172,15 @@ struct student *deletion(struct student *root, char rollNumber[20])
 			strcpy(curr->lecture, succesor->lecture);
 			strcpy(curr->tutorial, succesor->tutorial);
 			strcpy(curr->practical, succesor->practical);
+
 			root->right = deletion(root->right, succesor->rollNo);
 		}
 	}
 	return curr;
 }
+
 // This function looks for a node with a specific roll number in the BST and deletes it if its present and returns 1 on successful deletion and 0 otherwise. Note that if in case the node that you are deleting is the first, then you have to update the treeHead variable (a local variable in main) and that justifies the function being invoked with a reference to it (&treeHead)
+
 int deleteNode(struct student **ptr, char rollNumber[20])
 {
 	/*
@@ -199,6 +199,7 @@ int deleteNode(struct student **ptr, char rollNumber[20])
 }
 
 // This function takes the address of the root node in the BST as input and prints the roll number and email Id of each student in the BST, sorted in descending order of the roll number (use a variant of inorder traversal).To end with, the function returns the number of nodes in the BST. You may introduce your own global variable and increment it everytime a new value being printed
+
 int displayBST(struct student *ptr)
 {
 	/*using inorder traversal but moving from right to root to left prints the
@@ -220,7 +221,7 @@ int displayBST(struct student *ptr)
 void kthStudent(struct student *ptr, int *index)
 {
 	/*
-	using inorder traversal to access the elmeents in ascending order
+	using inorder traversal to access the elements in ascending order
 	on reaching the node
 	print the values and print the answer
 	*/
@@ -285,6 +286,7 @@ int main()
 			*/
 			nodeCopy = createNode(buffer);
 			status = insertNode(&treeHead, nodeCopy);
+
 			if (status == 0)
 			{
 				fprintf(fp2, "Insertion failed: Duplicate entry for %s\n", nodeCopy->rollNo);
@@ -310,7 +312,7 @@ int main()
 				else
 					fprintf(fp2, "Deletion successfull %s successfully removed\n", buffer.rollNo);
 			}
-			if (op == 3) // corresponds to search, comment this if block if you want to test your deletion alone
+			if (op == 3) // corresponds to search
 			{
 				int index = searchNode(treeHead, buffer.rollNo);
 
@@ -332,6 +334,7 @@ int main()
 
 	fclose(fp1);
 	fclose(fp2);
+	
 	int k;
 	printf("\nEnter the value of k (less than total count):");
 	scanf("%d", &k);

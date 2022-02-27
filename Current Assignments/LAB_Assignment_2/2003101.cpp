@@ -11,6 +11,7 @@
 */
 
 // Including all the required Libraries and Namespaces.
+
 #include <bits/stdc++.h>
 using namespace std;
 #define endl '\n'
@@ -60,7 +61,7 @@ int main() // Main Function
     int T_end[m][n]; // stores the column
 
     int T_sum[m][n]; // stores the sum of the elements in the column
-    int T_ID[m][n];
+    int T_ID[m][n]; // stores the ID of the column
 
     memset(T_ID, (int)0, sizeof(T_ID)); // initializing the matrix to 0
 
