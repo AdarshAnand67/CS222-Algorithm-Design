@@ -20,3 +20,4 @@ Midsem + Endsem = 40%
 - DP based, Matrix Chain Multiplication
 - KMP, Dijkstra, and Heap
 - FloydWarshallAlgorithm, HuffmanCoding
+- Vertex Cover
