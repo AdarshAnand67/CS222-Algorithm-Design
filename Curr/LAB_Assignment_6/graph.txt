@@ -1,0 +1,6 @@
+4
+a b c d
+0 5 INF 10
+5 0 3 INF
+INF 3 0 1
+10 INF 1 0

@@ -143,5 +143,5 @@ int chineseRemainder(int a, int b, int c, int d)
 
 signed main()
 {
-    int
+    int 
 }

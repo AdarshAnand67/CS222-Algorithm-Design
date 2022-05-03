@@ -22,7 +22,6 @@ int minSubArrayLen(int target, vector<int> &nums)
     return ans == INT_MAX ? 0 : ans;
 }
 
-
 // Maximum subarray problem
 // Given an array of integers, find the contiguous subarray with maximum sum.
 
@@ -36,10 +35,30 @@ int kadane(vector<int> &nums)
     {
         max_ending_here = max(nums[i], max_ending_here + nums[i]);
         max_so_far = max(max_so_far, max_ending_here);
-        if(max_ending_here < 0)
+        if (max_ending_here < 0)
             max_ending_here = 0;
     }
     return max_so_far;
+}
+
+// design an efficient algorithm that takes an array A[1 . . . n] of integers as input and computes a subarray whose average is maximum
+
+int max_Average(vector<int> &nums)
+{
+    int n = nums.size();
+    int sum = 0;
+    for (int i = 0; i < n; i++)
+        sum += nums[i];
+    int max_so_far = INT_MIN;
+    int max_ending_here = 0;
+    for (int i = 0; i < n; i++)
+    {
+        max_ending_here = max_ending_here + nums[i];
+        max_so_far = max(max_so_far, max_ending_here);
+        if (max_ending_here < 0)
+            max_ending_here = 0;
+    }
+    return (double)sum / n;
 }
 
 signed main()
@@ -53,13 +72,7 @@ signed main()
     {
         cin >> v[i];
     }
-    // cout << "Enter the target sum: ";
-    // int k;
-    // cin >> k;
-    // cout << "The minimum length of the subarray is: " << minSubArrayLen(k, v);
     cout << "The maximum sum of the subarray is: " << kadane(v);
 }
 
 // ------------------------------------------------------------------------------------------------
-
-

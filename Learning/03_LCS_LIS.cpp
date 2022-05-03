@@ -48,8 +48,8 @@ signed main()
     int n = x.length();
     int m = y.length();
     memset(dp, -1, sizeof(dp));
-    cout << "LCS of " << x << " and " << y << " is " << LCS(x, y, n, m) << endl;
-    cout << "LCS of " << x << " and " << y << " is " << LCS_DP(x, y, n, m) << endl;
+    cout << "LCS of " << x << " & " << y << " is " << LCS(x, y, n, m) << endl;
+    cout << "LCS of " << x << " & " << y << " is " << LCS_DP(x, y, n, m) << endl;
 
     vector<int> v = {1, 2, 3, 0, 5};
     int nm = v.size();

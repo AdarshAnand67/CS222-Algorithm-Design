@@ -10,7 +10,7 @@
     Roll No: 2003101
 */
 
-#include <bits/stdc++.h>
+#include <bits/stdc++.h> // Include all the necessary libraries
 using namespace std;
 #define endl '\n'
 
