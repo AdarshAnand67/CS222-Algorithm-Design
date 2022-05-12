@@ -18,7 +18,7 @@ using namespace std;
 vector<int> getPath(vector<vector<int>> parent, int i, int j)
 {
     // Function to get the path from the parent matrix
-    vector<int> path; // vector to store the path
+    vector<int> path; 
     for (int v = j; v != i; v = parent[i][v])
     {
         if (v == -1)
@@ -37,7 +37,7 @@ vector<int> getPath(vector<vector<int>> parent, int i, int j)
 void floydWarshall(vector<vector<int>> &matrix, vector<vector<int>> &p, int n)
 {
 
-    for (int k = 0; k < n; k++)
+    for (int k = 0; k < n; k++) //checking all intermediate paths
     {
         for (int i = 0; i < n; i++)
         {
@@ -46,9 +46,10 @@ void floydWarshall(vector<vector<int>> &matrix, vector<vector<int>> &p, int n)
 
                 if (matrix[i][k] + matrix[k][j] < matrix[i][j] && matrix[i][k] != INF && matrix[k][j] != INF)
                 {
-                    matrix[i][j] = matrix[i][k] + matrix[k][j]; // update the matrix
+                    // Between vertex i and j, the shortest path is through vertex k
+                    matrix[i][j] = matrix[i][k] + matrix[k][j]; 
 
-                    p[i][j] = k; // update the parent matrix
+                    p[i][j] = k; // update the parent 
                 }
             }
         }

@@ -12,19 +12,18 @@
     Space Complexity: O(k + m)
 */
 
-/*----------------------------------*/
-
 #include <bits/stdc++.h>
 using namespace std;
 
 #define inf (int)1e7
 void swap(pair<int, int> *x, pair<int, int> *y);
 
+// MinHeap Implementation from scratch
 class MinHeap
 {
-    pair<int, int> *harr; // {vertex, distance} pair
-    int capacity;         // maximum size of heap
-    int heap_size;        // current size of heap
+    pair<int, int> *heapArray; // {vertex, distance} pair
+    int capacity;              // maximum size of heap
+    int heap_size;             // current size of heap
 
 public:
     MinHeap(int capacity); // constructor
@@ -39,7 +38,7 @@ public:
 
     pair<int, int> extractingMin(); // function to extract the minimum element from the heap
 
-    pair<int, int> gettingMin() { return harr[0]; } // function to return the minimum element from the heap
+    pair<int, int> gettingMin() { return heapArray[0]; } // function to return the minimum element from the heap
 
     void insertKey(pair<int, int> k); // function to insert a key into the heap
 
@@ -51,7 +50,7 @@ MinHeap::MinHeap(int cap)
     // initialize the capacity and heap size
     heap_size = 0;
     capacity = cap;
-    harr = new pair<int, int>[cap];
+    heapArray = new pair<int, int>[cap];
 }
 
 void MinHeap::insertKey(pair<int, int> k)
@@ -64,12 +63,12 @@ void MinHeap::insertKey(pair<int, int> k)
 
     heap_size++;           // increment the heap size
     int i = heap_size - 1; // set the index of the new vertex
-    harr[i] = k;           // insert the new vertex
+    heapArray[i] = k;      // insert the new vertex
 
-    while (i != 0 && harr[parent(i)].first > harr[i].first)
+    while (i != 0 && heapArray[parent(i)].first > heapArray[i].first)
     {
-        swap(&harr[i], &harr[parent(i)]); // swap the new vertex with its parent
-        i = parent(i);                    // move to the parent
+        swap(&heapArray[i], &heapArray[parent(i)]); // swap the new vertex with its parent
+        i = parent(i);                              // move to the parent
     }
 }
 
@@ -80,11 +79,11 @@ pair<int, int> MinHeap::extractingMin()
     if (heap_size == 1)
     {
         heap_size--; // decrement the heap size
-        return harr[0];
+        return heapArray[0];
     }
 
-    pair<int, int> root = harr[0]; // store the root
-    harr[0] = harr[heap_size - 1];
+    pair<int, int> root = heapArray[0]; // store the root
+    heapArray[0] = heapArray[heap_size - 1];
     heap_size--;
     MinHeapify(0); // heapify the root
 
@@ -96,13 +95,13 @@ void MinHeap::MinHeapify(int i)
     int l = left(i);  // set the index of the left child
     int r = right(i); // set the index of the right child
     int smallest = i;
-    if (l < heap_size && harr[l].first < harr[i].first)
+    if (l < heap_size && heapArray[l].first < heapArray[i].first)
         smallest = l; // set the index of the smallest child
-    if (r < heap_size && harr[r].first < harr[smallest].first)
+    if (r < heap_size && heapArray[r].first < heapArray[smallest].first)
         smallest = r; // set the index of the smallest child
     if (smallest != i)
     {
-        swap(&harr[i], &harr[smallest]);
+        swap(&heapArray[i], &heapArray[smallest]);
         MinHeapify(smallest); // recursively heapify the subtree rooted with the smallest child
     }
 }
@@ -120,7 +119,7 @@ vector<int> restorePaths(int s, int t, vector<int> const &p)
 { // function to restore the path from the parent vector
     vector<int> path;
 
-    for (int v = t; v != s; v = p[v]) // traverse the parent vector from the destination to the source
+    for (int v = t; v != s; v = p[v]) // traverse the parent vector
         path.push_back(v);
     path.push_back(s); // push the source into the path
 
@@ -134,6 +133,7 @@ void dijkstra(int src, vector<vector<pair<int, int>>> &adj, vector<int> &dis, ve
     vis[src] = 1; // set the visited status of the source to 1
     while (!pq.empty())
     {
+        // GREEDY APPROACH 
         int node = pq.extractingMin().second; // extract the minimum distance vertex from the heap
 
         for (auto x : adj[node])
@@ -174,9 +174,11 @@ int main()
     dijkstra(1, adj, dis, vis, pq, p); // run the dijkstra algorithm
 
     freopen("CON", "r", stdin); // open the file to read the input
+
     cout << "*-----------------------------------------------------*\n";
     cout << "Welcome to the Lab Assignment 5\n";
     cout << "Follow the instructions in the terminal to get the output!\n";
+
     while (true)
     {
         cout << "\nEnter destination Vertex: "; // ask the user to enter the destination vertex
@@ -186,7 +188,7 @@ int main()
         if (d < 1 || d > n)
         {
             cout << "\nInvalid Vertex\n";
-            continue;
+            break;
         }
         vector<int> res = restorePaths(1, d, p); // restore the path
         cout << "The shortest path is: ";
@@ -198,13 +200,6 @@ int main()
                 cout << res[i];
         }
         cout << " of total cost " << dis[d] << '\n';
-        // press q to quit or any other key to continue
-        cout << "Press q to quit or any other character to continue: \n";
-        char c;
-        cin >> c;
-        if (c == 'q')
-            break;
     }
-    cout << "*-----------------------------------------------------*\n";
-    return 0;
+    cout << "*------------------------ Thank You ! -----------------------------*\n";
 }

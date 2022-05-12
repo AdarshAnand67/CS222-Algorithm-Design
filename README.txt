@@ -1,5 +1,3 @@
----------------------------------------------
-
 The weightage for the evaluation components would be as below.
 
 1. Quiz 20% - We will conduct quizes once in a while and the best n-2 quizzes will be taken into consideration assuming n quizes to take place.
@@ -13,11 +11,14 @@ Midsem + Endsem = 40%
 ---------------------------------------------
 
     TOPICS:
-- BST basics
+- BST basics, LCA
 - Max sum subarray, Kadane DP, Maximum sub-array sum problem
-- Number theory, Chinese remainder theorem
+- Number theory, Fermat test, Carmichael no, Fermat Little No, Modular arithmetic, Chinese remainder theorem  
 - LCIS, LIS
 - DP based, Matrix Chain Multiplication
 - KMP, Dijkstra, and Heap
 - FloydWarshallAlgorithm, HuffmanCoding
+!- Bellman Ford Algorithm, Activity Selection Problem, and Knapsack Problem.
 - Vertex Cover
+
+Create Short notes of the topics you have learnt using Abdul bari lectures.

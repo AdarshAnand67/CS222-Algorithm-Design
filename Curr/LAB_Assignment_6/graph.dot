@@ -1,0 +1,18 @@
+// 4
+// a b c d
+// 0 5 INF 10
+// 5 0 3 INF
+// INF 3 0 1
+// 10 INF 1 0
+
+
+digraph{
+    a->b [label="5"];
+    b->a [label="5"];
+    b-> c [label="3"];
+    c->b [label="3"];
+    c->d [label="1"];
+    d->c [label="1"];
+    a->d [label="10"];
+    d->a [label="10"];
+}
