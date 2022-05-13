@@ -30,15 +30,18 @@ int LCS_DP(string x, string y, int n, int m)
 int LIS(vector<int> v, int n)
 {
     // Recursive function to find the LIS of array[0..n-1]
-    if (n == 0)
-        return 0;
-    int ans = INT_MIN;
+    vector<int> LIS_DP(n, 1);
     for (int i = 0; i < n; i++)
     {
-        int curr_ans = 1 + LIS(v, i);
-        ans = max(ans, curr_ans);
+        for (int j = 0; j < i; j++)
+        {
+            if (v[i] > v[j])
+            {
+                LIS_DP[i] = max(LIS_DP[i], LIS_DP[j] + 1);
+            }
+        }
     }
-    return ans;
+    return LIS_DP[n - 1];
 } // Time Complexity: O(n^2)
 
 signed main()
@@ -51,7 +54,7 @@ signed main()
     cout << "LCS of " << x << " & " << y << " is " << LCS(x, y, n, m) << endl;
     cout << "LCS of " << x << " & " << y << " is " << LCS_DP(x, y, n, m) << endl;
 
-    vector<int> v = {1, 2, 3, 0, 5};
+    vector<int> v = {-1, 2, -3, 4, 15};
     int nm = v.size();
     cout << "LIS of given array is " << LIS(v, nm) << endl;
 }

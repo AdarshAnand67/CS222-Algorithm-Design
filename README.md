@@ -22,7 +22,7 @@ Midsem + Endsem = 40% -->
     - Max sum subarray, Kadane DP
     - Number theory, Fermat test, Carmichael no, Fermat Little No, Modular arithmetic, Chinese remainder theorem
     - LCIS, LIS
-    - DP based, Matrix Chain Multiplication
+    - Matrix Chain Multiplication
     - KMP, Dijkstra, and Heap
     - FloydWarshallAlgorithm, HuffmanCoding
     - Bellman Ford Algorithm, Activity Selection Problem, and Knapsack Problem.
